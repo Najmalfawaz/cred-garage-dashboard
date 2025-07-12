@@ -11,7 +11,7 @@ export function useTheme() {
     const initializeTheme = () => {
       try {
         const savedTheme = localStorage.getItem("theme") as "light" | "dark" | null
-        const initialTheme = savedTheme || "dark"
+        const initialTheme = savedTheme || "light"
 
         setTheme(initialTheme)
         document.documentElement.classList.remove("light", "dark")
