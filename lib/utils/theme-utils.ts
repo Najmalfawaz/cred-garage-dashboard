@@ -2,8 +2,6 @@ import { THEME_COLORS } from "@/lib/constants/theme"
 
 type Theme = "light" | "dark"
 
-export const getThemeColors = (theme: Theme) => THEME_COLORS[theme]
-
 export const getTextColor = (theme: Theme, variant: keyof typeof THEME_COLORS.light.text) => {
   return THEME_COLORS[theme].text[variant]
 }
