@@ -2,7 +2,7 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
-import { ThemeProvider } from "@/components/theme-provider"
+import { ThemeProvider } from "@/lib/hooks/theme-provider"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -18,7 +18,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" suppressHydrationWarnings>
+    <html lang="en" suppressHydrationWarning>
       <head>
         <script
           dangerouslySetInnerHTML={{
@@ -34,8 +34,8 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={inter.className} suppressHydrationWarnings>
-        <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+      <body className={inter.className} suppressHydrationWarning>
+        <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
           {children}
         </ThemeProvider>
       </body>

@@ -1,17 +1,11 @@
-export const THEME_CONSTANTS = {
-  STORAGE_KEY: "cred-garage-theme",
-  DEFAULT_THEME: "dark" as const,
-  COOKIE_MAX_AGE: 60 * 60 * 24 * 7, // 7 days
-} as const
-
 export const THEME_COLORS = {
   light: {
     background: "from-gray-50 via-white to-gray-100",
     text: {
       primary: "text-gray-900",
-      secondary: "text-gray-800", // Much darker
-      muted: "text-gray-700", // Much darker
-      subtle: "text-gray-600", // Much darker
+      secondary: "text-gray-800", 
+      muted: "text-gray-700", 
+      subtle: "text-gray-600", 
     },
     card: {
       background: "bg-white/90 border-gray-300",

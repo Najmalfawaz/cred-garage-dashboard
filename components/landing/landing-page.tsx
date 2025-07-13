@@ -8,7 +8,7 @@ import { FeaturesSection } from "@/components/landing/features-section"
 import { StatsSection } from "@/components/landing/stats-section"
 import { CTASection } from "@/components/landing/cta-section"
 import { FooterSection } from "@/components/landing/footer-section"
-import { useTheme } from "@/components/theme-provider"
+import { useTheme } from "@/lib/hooks/theme-provider"
 
 interface LandingPageProps {
   onEnterDashboard: () => void
@@ -19,36 +19,38 @@ export function LandingPage({ onEnterDashboard }: LandingPageProps) {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    // Simple loading timer - don't wait for theme
     const timer = setTimeout(() => {
       setIsLoading(false)
-    }, 1500)
+    }, 1000)
     return () => clearTimeout(timer)
   }, [])
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-black flex items-center justify-center">
-        <motion.div
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 0.5 }}
-          className="text-center"
-        >
-          <motion.div
-            animate={{ rotate: 360 }}
-            transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
-            className="w-16 h-16 border-4 border-purple-500 border-t-transparent rounded-full mx-auto mb-4"
-          />
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent"
-          >
-            Loading CRED Garage
-          </motion.h2>
-        </motion.div>
+      <div className="min-h-screen px-4 py-10 bg-gradient-to-br from-gray-900 via-purple-900 to-black">
+        <div className="space-y-10 animate-pulse text-gray-600">
+          {/* Navbar Skeleton */}
+          <div className="h-10 w-1/3 bg-gray-700 rounded-md" />
+
+          {/* Hero Section Skeleton */}
+          <div className="h-40 w-full bg-gray-800 rounded-xl" />
+
+          {/* Features Section Skeleton */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="h-32 bg-gray-700 rounded-lg" />
+            <div className="h-32 bg-gray-700 rounded-lg" />
+            <div className="h-32 bg-gray-700 rounded-lg" />
+          </div>
+
+          {/* Stats Section Skeleton */}
+          <div className="h-20 w-full bg-gray-800 rounded-lg" />
+
+          {/* CTA Section Skeleton */}
+          <div className="h-32 bg-gray-700 rounded-xl" />
+
+          {/* Footer Skeleton */}
+          <div className="h-16 bg-gray-800 rounded-md mt-10" />
+        </div>
       </div>
     )
   }

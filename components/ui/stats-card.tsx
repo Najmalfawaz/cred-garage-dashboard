@@ -2,9 +2,9 @@
 
 import { motion } from "framer-motion"
 import { useState } from "react"
-import { useTheme } from "@/hooks/use-theme"
 import { Card, CardContent } from "@/components/ui/card"
 import { getColorValues } from "@/lib/utils/color-utils"
+import { useTheme } from "../../lib/hooks/theme-provider"
 
 interface StatsCardProps {
   icon: any

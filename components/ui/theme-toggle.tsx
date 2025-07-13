@@ -2,8 +2,8 @@
 
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
-import { useTheme } from "@/hooks/use-theme"
 import { Moon, Sun } from "lucide-react"
+import { useTheme } from "../../lib/hooks/theme-provider"
 
 export function ThemeToggle() {
   const { theme, toggleTheme } = useTheme()

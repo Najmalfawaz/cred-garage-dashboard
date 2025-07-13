@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import { Zap, Github, Twitter, Linkedin, Mail } from "lucide-react"
-import { useTheme } from "@/components/theme-provider"
+import { useTheme } from "@/lib/hooks/theme-provider"
 
 export function FooterSection() {
   const { theme } = useTheme()

@@ -1,8 +1,8 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { useTheme } from "@/lib/hooks/use-theme"
 import { getTextColor } from "@/lib/utils/theme-utils"
+import { useTheme } from "@/lib/hooks/theme-provider"
 
 interface LineChartProps {
   data: Array<{

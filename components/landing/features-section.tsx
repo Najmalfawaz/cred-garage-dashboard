@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import { Zap, Shield, BarChart3, Gift, Smartphone, Palette } from "lucide-react"
-import { useTheme } from "@/components/theme-provider"
+import { useTheme } from "@/lib/hooks/theme-provider"
 
 export function FeaturesSection() {
   const { theme } = useTheme()

@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import { TrendingUp, Users, Award, Zap } from "lucide-react"
-import { useTheme } from "@/components/theme-provider"
+import { useTheme } from "@/lib/hooks/theme-provider"
 
 export function StatsSection() {
   const { theme } = useTheme()

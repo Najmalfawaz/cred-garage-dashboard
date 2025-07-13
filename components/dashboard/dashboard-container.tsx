@@ -7,8 +7,8 @@ import { BenefitsSection } from "@/components/sections/benefits-section"
 import { RewardProgressSection } from "@/components/sections/reward-progress-section"
 import { DashboardHeader } from "@/components/layout/dashboard-header"
 import { StatsModal } from "@/components/stats-modal"
-import { useTheme } from "@/lib/hooks/use-theme"
 import { THEME_COLORS } from "@/lib/constants/theme"
+import { useTheme } from "../../lib/hooks/theme-provider"
 
 export function DashboardContainer() {
   const [isLoading, setIsLoading] = useState(true)
@@ -42,21 +42,19 @@ export function DashboardContainer() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="flex items-center justify-center min-h-[60vh]"
+              className="space-y-6 sm:space-y-8 animate-pulse"
             >
-              <div className="text-center">
-                <motion.div
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
-                  className="w-12 h-12 border-4 border-purple-500 border-t-transparent rounded-full mx-auto mb-4"
-                />
-                <motion.h2
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="text-xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent"
-                >
-                  Loading Dashboard...
-                </motion.h2>
+              {/* Skeleton: User Profile Section */}
+              <div className="h-28 bg-gray-700 rounded-xl" />
+
+              {/* Skeleton: Reward Progress Section */}
+              <div className="h-24 bg-gray-700 rounded-xl" />
+
+              {/* Skeleton: Benefits Section */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div className="h-32 bg-gray-700 rounded-xl" />
+                <div className="h-32 bg-gray-700 rounded-xl" />
+                <div className="h-32 bg-gray-700 rounded-xl" />
               </div>
             </motion.div>
           ) : (

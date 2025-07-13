@@ -3,7 +3,7 @@
 import { motion } from "framer-motion"
 import { ArrowRight, Play, Star, Zap, Shield, Award } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { useTheme } from "@/components/theme-provider"
+import { useTheme } from "@/lib/hooks/theme-provider"
 
 interface HeroSectionProps {
   onEnterDashboard: () => void

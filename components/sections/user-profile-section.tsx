@@ -3,11 +3,11 @@
 import { motion, AnimatePresence } from "framer-motion"
 import { TrendingUp, Crown, Star } from "lucide-react"
 import { useState } from "react"
-import { useTheme } from "@/lib/hooks/use-theme"
 import { getTextColor, getCardStyles } from "@/lib/utils/theme-utils"
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
+import { useTheme } from "../../lib/hooks/theme-provider"
 
 export function UserProfileSection() {
   const { theme } = useTheme()
