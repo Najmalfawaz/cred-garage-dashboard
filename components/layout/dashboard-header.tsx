@@ -3,8 +3,8 @@
 import { motion } from "framer-motion"
 import { BarChart3 } from "lucide-react"
 import { ThemeToggle } from "@/components/ui/theme-toggle"
-import { useTheme } from "@/lib/hooks/use-theme"
 import { getTextColor } from "@/lib/utils/theme-utils"
+import { useTheme } from "../../lib/hooks/theme-provider"
 
 interface DashboardHeaderProps {
   onOpenStats: () => void

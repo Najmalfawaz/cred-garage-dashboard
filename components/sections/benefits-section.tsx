@@ -3,13 +3,13 @@
 import { motion, AnimatePresence } from "framer-motion"
 import { Clock, ChevronRight } from "lucide-react"
 import { useState } from "react"
-import { useTheme } from "@/lib/hooks/use-theme"
 import { getTextColor, getCardStyles } from "@/lib/utils/theme-utils"
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { benefitsData } from "@/lib/data/benefits-data"
 import { getBackgroundGradient, getStatusColor } from "@/lib/utils/color-utils"
+import { useTheme } from "../../lib/hooks/theme-provider"
 
 export function BenefitsSection() {
   const { theme } = useTheme()

@@ -5,8 +5,8 @@ import { useState, useEffect } from "react"
 import { Menu, X, Zap, BarChart3, Gift } from "lucide-react"
 import { ThemeToggle } from "@/components/ui/theme-toggle"
 import { Button } from "@/components/ui/button"
-import { useTheme } from "@/lib/hooks/use-theme"
 import { getNavbarStyles, getTextColor } from "@/lib/utils/theme-utils"
+import { useTheme } from "../../lib/hooks/theme-provider"
 
 interface NavbarProps {
   onEnterDashboard: () => void

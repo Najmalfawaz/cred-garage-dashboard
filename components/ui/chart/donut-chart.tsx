@@ -1,8 +1,9 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { useTheme } from "@/lib/hooks/use-theme"
+import { useTheme } from "@/lib/hooks/theme-provider"
 import { getTextColor } from "@/lib/utils/theme-utils"
+
 
 interface DonutChartProps {
   data: Array<{

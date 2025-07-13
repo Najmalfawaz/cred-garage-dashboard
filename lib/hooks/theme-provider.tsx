@@ -27,28 +27,32 @@ const ThemeProviderContext = createContext<ThemeProviderState>(initialState)
 
 export function ThemeProvider({
   children,
-  defaultTheme = "dark",
+  defaultTheme = "light",
   storageKey = "vite-ui-theme",
   ...props
 }: ThemeProviderProps) {
   const [theme, setTheme] = useState<Theme>(defaultTheme)
   const [mounted, setMounted] = useState(false)
 
+  
   useEffect(() => {
     const root = window.document.documentElement
-    const stored = localStorage.getItem(storageKey) as Theme
+    const stored = localStorage.getItem(storageKey) as Theme | null
 
-    if (stored) {
-      setTheme(stored)
-      root.classList.remove("light", "dark")
-      root.classList.add(stored)
-    } else {
-      root.classList.remove("light", "dark")
-      root.classList.add(defaultTheme)
+    const appliedTheme = stored || defaultTheme
+    setTheme(appliedTheme)
+
+    root.classList.remove("light", "dark")
+    root.classList.add(appliedTheme)
+
+    // Set localStorage if not already set
+    if (!stored) {
+      localStorage.setItem(storageKey, defaultTheme)
     }
 
     setMounted(true)
   }, [defaultTheme, storageKey])
+
 
   const value = {
     theme,

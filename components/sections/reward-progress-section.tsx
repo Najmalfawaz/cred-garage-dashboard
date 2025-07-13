@@ -3,11 +3,11 @@
 import { motion, AnimatePresence } from "framer-motion"
 import { Coins, Target, TrendingUp, Award } from "lucide-react"
 import { useEffect, useState } from "react"
-import { useTheme } from "@/hooks/use-theme"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
 import { CircularChart } from "@/components/ui/circular-chart"
 import { Progress3D } from "@/components/ui/progress-3d"
 import { StatsCard } from "@/components/ui/stats-card"
+import { useTheme } from "../../lib/hooks/theme-provider"
 
 export function RewardProgressSection() {
   const { theme } = useTheme()

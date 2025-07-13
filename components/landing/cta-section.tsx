@@ -3,7 +3,7 @@
 import { motion } from "framer-motion"
 import { ArrowRight, Sparkles, Star } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { useTheme } from "@/components/theme-provider"
+import { useTheme } from "@/lib/hooks/theme-provider"
 
 interface CTASectionProps {
   onEnterDashboard: () => void

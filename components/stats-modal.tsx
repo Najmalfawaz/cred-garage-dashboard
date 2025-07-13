@@ -1,13 +1,15 @@
 "use client"
 
 import { motion, AnimatePresence } from "framer-motion"
-import { useTheme } from "@/lib/hooks/use-theme"
 import { X, TrendingUp, Award, Gift, Zap, Calendar, Target } from "lucide-react"
 import { useState, useEffect } from "react"
 import { getTextColor, getCardStyles } from "@/lib/utils/theme-utils"
 import { BarChart } from "@/components/ui/chart/bar-chart"
 import { LineChart } from "@/components/ui/chart/line-chart"
 import { DonutChart } from "@/components/ui/chart/donut-chart"
+import { useTheme } from "../lib/hooks/theme-provider"
+import { monthlyData, categoryData, trendsData } from "@/lib/data/stats-data"
+
 
 interface StatsModalProps {
   isOpen: boolean
@@ -17,31 +19,6 @@ interface StatsModalProps {
 export function StatsModal({ isOpen, onClose }: StatsModalProps) {
   const { theme } = useTheme()
   const [activeTab, setActiveTab] = useState("overview")
-
-  // Mock data for charts
-  const monthlyData = [
-    { name: "Jan", value: 1200 },
-    { name: "Feb", value: 1800 },
-    { name: "Mar", value: 2200 },
-    { name: "Apr", value: 1900 },
-    { name: "May", value: 2800 },
-    { name: "Jun", value: 3200 },
-  ]
-
-  const categoryData = [
-    { name: "Fuel", value: 5512, color: "#3b82f6" },
-    { name: "Dining", value: 3940, color: "#ef4444" },
-    { name: "Shopping", value: 3150, color: "#10b981" },
-    { name: "Travel", value: 2363, color: "#f59e0b" },
-    { name: "Others", value: 788, color: "#8b5cf6" },
-  ]
-
-  const trendsData = [
-    { name: "Week 1", value: 580 },
-    { name: "Week 2", value: 720 },
-    { name: "Week 3", value: 650 },
-    { name: "Week 4", value: 890 },
-  ]
 
   useEffect(() => {
     if (isOpen) {
@@ -312,6 +289,7 @@ export function StatsModal({ isOpen, onClose }: StatsModalProps) {
   )
 }
 
+
 // Stats Card Component for Modal
 const StatsCard = ({
   icon: Icon,
@@ -326,18 +304,24 @@ const StatsCard = ({
   value: string
   change: string
   positive: boolean | null
-  theme: string
+  theme: "light" | "dark"
 }) => (
   <motion.div whileHover={{ scale: 1.02, y: -2 }} className={`p-4 rounded-xl ${getCardStyles(theme)}`}>
     <div className="flex items-center space-x-2 mb-2">
       <Icon className="w-4 h-4 text-purple-400" />
       <span className={`text-sm font-medium ${getTextColor(theme, "secondary")}`}>{title}</span>
     </div>
-    <div className={`text-xl font-bold ${getTextColor(theme, "primary")}`}>{value}</div>
-    {change !== "0" && (
-      <div className={`text-sm ${positive ? "text-green-400" : positive === false ? "text-red-500" : "text-gray-500"}`}>
-        {change}
-      </div>
-    )}
+    <div className={`text-2xl font-bold ${getTextColor(theme, "primary")}`}>{value}</div>
+    <div
+      className={`text-sm ${
+        positive === null
+          ? getTextColor(theme, "muted")
+          : positive
+          ? "text-green-500"
+          : "text-red-500"
+      }`}
+    >
+      {change}
+    </div>
   </motion.div>
 )
