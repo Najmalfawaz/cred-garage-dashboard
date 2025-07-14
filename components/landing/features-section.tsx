@@ -133,11 +133,10 @@ export function FeaturesSection() {
               style={{ transformStyle: "preserve-3d" }}
             >
               <div
-                className={`relative p-8 rounded-2xl backdrop-blur-sm border transition-all duration-500 ${
-                  theme === "dark"
+                className={`relative p-8 rounded-2xl backdrop-blur-sm border transition-all duration-500 ${theme === "dark"
                     ? "bg-gray-800/50 border-gray-700 hover:bg-gray-800/70"
                     : "bg-white/70 border-gray-200 hover:bg-white/90"
-                } hover:shadow-2xl hover:shadow-purple-500/10`}
+                  } hover:shadow-2xl hover:shadow-purple-500/10`}
               >
                 {/* Animated Background */}
                 <motion.div
@@ -173,10 +172,16 @@ export function FeaturesSection() {
                 </motion.div>
 
                 {/* Content */}
-                <h3 className={`text-xl font-bold mb-4 ${theme === "dark" ? "text-white" : "text-gray-900"}`}>
+                <h3
+                  className={`group relative z-10 text-xl font-bold mb-4 transition-colors duration-300 ${theme === "dark" ? "text-white" : "text-gray-900"
+                    } `}
+                >
                   {feature.title}
                 </h3>
-                <p className={`${theme === "dark" ? "text-gray-300" : "text-gray-600"} leading-relaxed`}>
+                <p
+                  className={` group relative z-10 leading-relaxed transition-colors duration-300 ${theme === "dark" ? "text-gray-300" : "text-gray-600"
+                    } `}
+                >
                   {feature.description}
                 </p>
 

@@ -166,19 +166,19 @@ export function StatsSection() {
                       ease: "linear",
                       delay: index * 0.5,
                     }}
-                    className={`text-3xl sm:text-4xl font-bold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent bg-[length:200%_100%]`}
-                  >
+  className={`group relative z-10 text-3xl sm:text-4xl font-bold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent bg-[length:200%_100%] group-hover:bg-[length:500%_100%] transition-[background-size] duration-300 ease-in-out`}
+>
                     {stat.value}
                   </motion.div>
                 </motion.div>
 
                 {/* Label */}
-                <h3 className={`text-lg font-semibold mb-2 ${theme === "dark" ? "text-white" : "text-gray-900"}`}>
+                <h3 className={`group relative z-10 text-lg font-semibold mb-2 ${theme === "dark" ? "text-white" : "text-gray-900"}`}>
                   {stat.label}
                 </h3>
 
                 {/* Description */}
-                <p className={`text-sm ${theme === "dark" ? "text-gray-400" : "text-gray-600"}`}>{stat.description}</p>
+                <p className={`group relative z-10 text-sm ${theme === "dark" ? "text-gray-400" : "text-gray-600"}`}>{stat.description}</p>
 
                 {/* Hover Glow Effect */}
                 <motion.div

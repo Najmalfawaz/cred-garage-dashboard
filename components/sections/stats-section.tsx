@@ -13,10 +13,9 @@ import {
   PieChart,
   Pie,
   Cell,
-  Legend
+  Legend,
 } from 'recharts'
 
-// Sample chart data
 const balanceData = [
   { month: 'Jan', balance: 20000 },
   { month: 'Feb', balance: 30000 },
@@ -41,39 +40,25 @@ const COLORS = ['#4ade80', '#f87171']
 export const StatsSection = () => {
   return (
     <motion.section
-      className="w-full max-w-7xl mx-auto px-4 md:px-8 py-10 grid grid-cols-1 md:grid-cols-2 gap-8"
+      className="w-full max-w-7xl mx-auto px-4 md:px-8 py-12 grid grid-cols-1 md:grid-cols-2 gap-6"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      {/* Balance Bar Chart */}
-      <motion.div
-        className="bg-white dark:bg-zinc-900 p-6 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-md"
-        initial={{ opacity: 0, y: 10 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.4 }}
-      >
-        <h3 className="text-lg font-semibold mb-4 text-zinc-700 dark:text-zinc-100">Monthly Balance</h3>
+      {/* Monthly Balance Chart */}
+      <StatCard title="Monthly Balance">
         <ResponsiveContainer width="100%" height={250}>
           <BarChart data={balanceData}>
-            <XAxis dataKey="month" />
-            <YAxis />
+            <XAxis dataKey="month" stroke="#9ca3af" />
+            <YAxis stroke="#9ca3af" />
             <Tooltip />
-            <Bar dataKey="balance" fill="#6366f1" radius={[4, 4, 0, 0]} />
+            <Bar dataKey="balance" fill="#6366f1" radius={[6, 6, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
-      </motion.div>
+      </StatCard>
 
       {/* Savings Pie Chart */}
-      <motion.div
-        className="bg-white dark:bg-zinc-900 p-6 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-md"
-        initial={{ opacity: 0, y: 10 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.4, delay: 0.1 }}
-      >
-        <h3 className="text-lg font-semibold mb-4 text-zinc-700 dark:text-zinc-100">Savings Overview</h3>
+      <StatCard title="Savings Overview" delay={0.1}>
         <ResponsiveContainer width="100%" height={250}>
           <PieChart>
             <Pie
@@ -89,29 +74,56 @@ export const StatsSection = () => {
               ))}
             </Pie>
             <Tooltip />
-            <Legend />
+            <Legend iconType="circle" />
           </PieChart>
         </ResponsiveContainer>
-      </motion.div>
+      </StatCard>
 
       {/* Credit Score Line Chart */}
-      <motion.div
-        className="bg-white dark:bg-zinc-900 p-6 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-md col-span-1 md:col-span-2"
-        initial={{ opacity: 0, y: 10 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.4, delay: 0.2 }}
-      >
-        <h3 className="text-lg font-semibold mb-4 text-zinc-700 dark:text-zinc-100">Credit Score Trend</h3>
+      <StatCard title="Credit Score Trend" fullWidth delay={0.2}>
         <ResponsiveContainer width="100%" height={300}>
           <LineChart data={creditTrendData}>
-            <XAxis dataKey="month" />
-            <YAxis domain={[740, 780]} />
+            <XAxis dataKey="month" stroke="#9ca3af" />
+            <YAxis domain={[740, 780]} stroke="#9ca3af" />
             <Tooltip />
-            <Line type="monotone" dataKey="score" stroke="#22c55e" strokeWidth={2} dot={{ r: 4 }} />
+            <Line
+              type="monotone"
+              dataKey="score"
+              stroke="#22c55e"
+              strokeWidth={3}
+              dot={{ r: 4 }}
+            />
           </LineChart>
         </ResponsiveContainer>
-      </motion.div>
+      </StatCard>
     </motion.section>
   )
 }
+
+// Reusable Card Component
+const StatCard = ({
+  title,
+  children,
+  delay = 0,
+  fullWidth = false,
+}: {
+  title: string
+  children: React.ReactNode
+  delay?: number
+  fullWidth?: boolean
+}) => (
+  <motion.div
+    className={`bg-white dark:bg-zinc-900 p-6 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-sm transition-shadow hover:shadow-md ${
+      fullWidth ? 'col-span-1 md:col-span-2' : ''
+    }`}
+    initial={{ opacity: 0, y: 10 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.5, delay }}
+  >
+    <h3 className="text-xl font-medium mb-4 text-zinc-800 dark:text-zinc-100">
+      {title}
+    </h3>
+    {children}
+  </motion.div>
+)

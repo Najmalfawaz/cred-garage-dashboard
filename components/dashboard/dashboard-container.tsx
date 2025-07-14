@@ -63,8 +63,9 @@ export function DashboardContainer() {
             >
               <UserProfileSection {...userProfileData} />
               <RewardProgressSection />
-              <BenefitsSection />
               <StatsSection />
+              <BenefitsSection />
+              
             </motion.div>
           )}
         </AnimatePresence>
