@@ -2,18 +2,16 @@
 
 import { motion, AnimatePresence } from "framer-motion"
 import { useState, useEffect } from "react"
-import { Menu, X, Zap, BarChart3, Gift } from "lucide-react"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
+import { Menu, X, Zap, BarChart3, Gift, LayoutDashboard } from "lucide-react"
 import { ThemeToggle } from "@/components/ui/theme-toggle"
-import { Button } from "@/components/ui/button"
 import { getNavbarStyles, getTextColor } from "@/lib/utils/theme-utils"
 import { useTheme } from "../../lib/hooks/theme-provider"
 
-interface NavbarProps {
-  onEnterDashboard: () => void
-}
-
-export function Navbar({ onEnterDashboard }: NavbarProps) {
+export function Navbar() {
   const { theme } = useTheme()
+  const pathname = usePathname()
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
@@ -29,7 +27,13 @@ export function Navbar({ onEnterDashboard }: NavbarProps) {
     { name: "Features", href: "#features", icon: Zap },
     { name: "Analytics", href: "#stats", icon: BarChart3 },
     { name: "Rewards", href: "#rewards", icon: Gift },
+    { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
   ]
+
+  const isActive = (href: string) => {
+    // Active if full match (for routes like /dashboard), or page pathname matches anchor (like #section)
+    return href === pathname || (href.startsWith("/") && pathname.startsWith(href))
+  }
 
   return (
     <>
@@ -44,15 +48,8 @@ export function Navbar({ onEnterDashboard }: NavbarProps) {
             {/* Logo */}
             <motion.div whileHover={{ scale: 1.05 }} className="flex items-center space-x-2 cursor-pointer">
               <motion.div
-                animate={{
-                  rotate: [0, 360],
-                  scale: [1, 1.1, 1],
-                }}
-                transition={{
-                  duration: 4,
-                  repeat: Number.POSITIVE_INFINITY,
-                  ease: "easeInOut",
-                }}
+                animate={{ rotate: [0, 360], scale: [1, 1.1, 1] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                 className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center"
               >
                 <Zap className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
@@ -68,40 +65,32 @@ export function Navbar({ onEnterDashboard }: NavbarProps) {
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center space-x-8">
               {navItems.map((item, index) => (
-                <motion.a
-                  key={item.name}
-                  href={item.href}
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 * index + 0.3 }}
-                  whileHover={{ scale: 1.05, y: -2 }}
-                  className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-300 font-medium ${getTextColor(theme, "secondary")} hover:${getTextColor(theme, "primary")} ${
-                    theme === "dark" ? "hover:bg-gray-800/50" : "hover:bg-gray-100/80"
-                  }`}
-                >
-                  <item.icon className="w-4 h-4" />
-                  <span>{item.name}</span>
-                </motion.a>
+                <Link key={item.name} href={item.href} legacyBehavior>
+                  <motion.a
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.1 * index + 0.3 }}
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-300 font-medium
+                      ${
+                        isActive(item.href)
+                          ? "text-purple-600 dark:text-purple-400 underline underline-offset-4"
+                          : `${getTextColor(theme, "secondary")} hover:${getTextColor(theme, "primary")} ${
+                              theme === "dark" ? "hover:bg-gray-800/50" : "hover:bg-gray-100/80"
+                            }`
+                      }
+                    `}
+                  >
+                    <item.icon className="w-4 h-4" />
+                    <span>{item.name}</span>
+                  </motion.a>
+                </Link>
               ))}
             </div>
 
             {/* Desktop Actions */}
             <div className="hidden lg:flex items-center space-x-4">
               <ThemeToggle />
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.5 }}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Button
-                  onClick={onEnterDashboard}
-                  className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white border-0 px-6 py-2 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
-                >
-                  Enter Dashboard
-                </Button>
-              </motion.div>
             </div>
 
             {/* Mobile Menu Button */}
@@ -110,9 +99,10 @@ export function Navbar({ onEnterDashboard }: NavbarProps) {
               <motion.button
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className={`p-2 rounded-lg transition-colors font-medium ${getTextColor(theme, "secondary")} hover:${getTextColor(theme, "primary")} ${
-                  theme === "dark" ? "hover:bg-gray-800" : "hover:bg-gray-100"
-                }`}
+                className={`p-2 rounded-lg transition-colors font-medium ${getTextColor(theme, "secondary")} hover:${getTextColor(
+                  theme,
+                  "primary"
+                )} ${theme === "dark" ? "hover:bg-gray-800" : "hover:bg-gray-100"}`}
               >
                 {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
               </motion.button>
@@ -134,37 +124,27 @@ export function Navbar({ onEnterDashboard }: NavbarProps) {
             >
               <div className="container mx-auto px-4 py-4 space-y-3">
                 {navItems.map((item, index) => (
-                  <motion.a
-                    key={item.name}
-                    href={item.href}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.1 * index }}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className={`flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-300 font-medium ${getTextColor(theme, "secondary")} hover:${getTextColor(theme, "primary")} ${
-                      theme === "dark" ? "hover:bg-gray-800/50" : "hover:bg-gray-100/80"
-                    }`}
-                  >
-                    <item.icon className="w-5 h-5" />
-                    <span>{item.name}</span>
-                  </motion.a>
+                  <Link key={item.name} href={item.href} legacyBehavior>
+                    <motion.a
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.1 * index }}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className={`flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-300 font-medium
+                        ${
+                          isActive(item.href)
+                            ? "text-purple-600 dark:text-purple-400 underline underline-offset-4"
+                            : `${getTextColor(theme, "secondary")} hover:${getTextColor(theme, "primary")} ${
+                                theme === "dark" ? "hover:bg-gray-800/50" : "hover:bg-gray-100/80"
+                              }`
+                        }
+                      `}
+                    >
+                      <item.icon className="w-5 h-5" />
+                      <span>{item.name}</span>
+                    </motion.a>
+                  </Link>
                 ))}
-                <motion.div
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.4 }}
-                  className={`pt-3 border-t ${theme === "dark" ? "border-gray-700" : "border-gray-300"}`}
-                >
-                  <Button
-                    onClick={() => {
-                      setIsMobileMenuOpen(false)
-                      onEnterDashboard()
-                    }}
-                    className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white border-0 py-3 rounded-xl font-semibold"
-                  >
-                    Enter Dashboard
-                  </Button>
-                </motion.div>
               </div>
             </motion.div>
           )}

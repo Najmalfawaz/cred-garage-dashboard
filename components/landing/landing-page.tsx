@@ -69,7 +69,7 @@ export function LandingPage({ onEnterDashboard }: LandingPageProps) {
             : "radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.1) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.1) 0%, transparent 50%)",
       }}
     >
-      <Navbar onEnterDashboard={onEnterDashboard} />
+      <Navbar /> {}
 
       <motion.main initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8 }}>
         <HeroSection onEnterDashboard={onEnterDashboard} />

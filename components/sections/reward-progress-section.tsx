@@ -7,7 +7,8 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
 import { CircularChart } from "@/components/ui/circular-chart"
 import { Progress3D } from "@/components/ui/progress-3d"
 import { StatsCard } from "@/components/ui/stats-card"
-import { useTheme } from "../../lib/hooks/theme-provider"
+import { useTheme } from "@/lib/hooks/theme-provider"
+
 
 export function RewardProgressSection() {
   const { theme } = useTheme()
