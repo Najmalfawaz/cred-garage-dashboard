@@ -1,16 +1,11 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { BarChart3 } from "lucide-react"
 import { ThemeToggle } from "@/components/ui/theme-toggle"
 import { getTextColor } from "@/lib/utils/theme-utils"
 import { useTheme } from "../../lib/hooks/theme-provider"
 
-interface DashboardHeaderProps {
-  onOpenStats: () => void
-}
-
-export function DashboardHeader({ onOpenStats }: DashboardHeaderProps) {
+export function DashboardHeader() {
   const { theme } = useTheme()
 
   return (
@@ -41,7 +36,7 @@ export function DashboardHeader({ onOpenStats }: DashboardHeaderProps) {
           Your premium rewards dashboard
         </p>
 
-        {/* Floating particles - hidden on very small screens */}
+        {/* Floating particles */}
         <motion.div
           animate={{
             y: [-10, 10, -10],
@@ -70,23 +65,6 @@ export function DashboardHeader({ onOpenStats }: DashboardHeaderProps) {
       </div>
 
       <div className="flex items-center space-x-2 sm:space-x-4 flex-shrink-0">
-        <motion.button
-          whileHover={{
-            scale: 1.05,
-            rotateY: 10,
-            rotateX: 5,
-          }}
-          whileTap={{ scale: 0.95 }}
-          onClick={onOpenStats}
-          className={`p-2 sm:p-3 rounded-xl backdrop-blur-sm border transition-all duration-300 ${
-            theme === "dark"
-              ? "bg-gray-800/50 border-gray-700 hover:bg-gray-700/70 text-gray-200 hover:text-white"
-              : "bg-white/80 border-gray-300 hover:bg-white text-gray-700 hover:text-gray-900"
-          }`}
-          style={{ transformStyle: "preserve-3d" }}
-        >
-          <BarChart3 className="w-4 h-4 sm:w-5 sm:h-5" />
-        </motion.button>
         <ThemeToggle />
       </div>
     </motion.div>

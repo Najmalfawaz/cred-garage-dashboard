@@ -24,10 +24,10 @@ export function Navbar() {
   }, [])
 
   const navItems = [
+    { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
     { name: "Features", href: "#features", icon: Zap },
     { name: "Analytics", href: "#stats", icon: BarChart3 },
     { name: "Rewards", href: "#rewards", icon: Gift },
-    { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
   ]
 
   const isActive = (href: string) => {

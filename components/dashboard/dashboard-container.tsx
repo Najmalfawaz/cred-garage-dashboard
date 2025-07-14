@@ -1,4 +1,4 @@
-"use client"
+'use client'
 
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
@@ -6,13 +6,13 @@ import { UserProfileSection } from "@/components/sections/user-profile-section"
 import { BenefitsSection } from "@/components/sections/benefits-section"
 import { RewardProgressSection } from "@/components/sections/reward-progress-section"
 import { DashboardHeader } from "@/components/layout/dashboard-header"
-import { StatsModal } from "@/components/stats-modal"
 import { THEME_COLORS } from "@/lib/constants/theme"
 import { useTheme } from "../../lib/hooks/theme-provider"
+import { userProfileData } from "@/lib/data/user-data"
+import { StatsSection } from "../sections/stats-section"
 
 export function DashboardContainer() {
   const [isLoading, setIsLoading] = useState(true)
-  const [showStatsModal, setShowStatsModal] = useState(false)
   const { theme } = useTheme()
 
   useEffect(() => {
@@ -33,7 +33,7 @@ export function DashboardContainer() {
       }}
     >
       <div className="container mx-auto px-3 sm:px-4 py-4 sm:py-8 max-w-6xl">
-        <DashboardHeader onOpenStats={() => setShowStatsModal(true)} />
+        <DashboardHeader />
 
         <AnimatePresence mode="wait">
           {isLoading ? (
@@ -44,13 +44,8 @@ export function DashboardContainer() {
               exit={{ opacity: 0 }}
               className="space-y-6 sm:space-y-8 animate-pulse"
             >
-              {/* Skeleton: User Profile Section */}
               <div className="h-28 bg-gray-700 rounded-xl" />
-
-              {/* Skeleton: Reward Progress Section */}
               <div className="h-24 bg-gray-700 rounded-xl" />
-
-              {/* Skeleton: Benefits Section */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 <div className="h-32 bg-gray-700 rounded-xl" />
                 <div className="h-32 bg-gray-700 rounded-xl" />
@@ -66,25 +61,14 @@ export function DashboardContainer() {
               transition={{ duration: 0.5 }}
               className="space-y-4 sm:space-y-6 lg:space-y-8 pb-4 sm:pb-8"
             >
-              <UserProfileSection
-                name="Najmal Fawaz"
-                initials="NJ"
-                avatarUrl="/user123.jpg"
-                membership="Elite Member"
-                level={12}
-                creditScore={850}
-                currentXP={2450}
-                nextLevelXP={3000}
-              />
-
+              <UserProfileSection {...userProfileData} />
               <RewardProgressSection />
               <BenefitsSection />
+              <StatsSection />
             </motion.div>
           )}
         </AnimatePresence>
       </div>
-
-      <StatsModal isOpen={showStatsModal} onClose={() => setShowStatsModal(false)} />
     </div>
   )
 }
