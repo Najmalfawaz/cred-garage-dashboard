@@ -48,7 +48,7 @@ export function FooterSection() {
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Main Footer Content */}
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 mb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-6 gap-12 mb-12">
           {/* Brand Section */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -157,7 +157,7 @@ export function FooterSection() {
           }`}
         >
           <p className={`text-sm ${theme === "dark" ? "text-gray-400" : "text-gray-600"}`}>
-            © 2024 CRED Garage. All rights reserved. Built with ❤️ for the future of rewards.
+            © 2025 CRED Garage. All rights reserved. Built with ❤️ for the future of rewards.
           </p>
 
           <div className="flex items-center space-x-6">

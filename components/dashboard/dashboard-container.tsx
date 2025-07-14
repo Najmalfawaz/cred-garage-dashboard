@@ -66,7 +66,17 @@ export function DashboardContainer() {
               transition={{ duration: 0.5 }}
               className="space-y-4 sm:space-y-6 lg:space-y-8 pb-4 sm:pb-8"
             >
-              <UserProfileSection />
+              <UserProfileSection
+                name="Najmal Fawaz"
+                initials="NJ"
+                avatarUrl="/user123.jpg"
+                membership="Elite Member"
+                level={12}
+                creditScore={850}
+                currentXP={2450}
+                nextLevelXP={3000}
+              />
+
               <RewardProgressSection />
               <BenefitsSection />
             </motion.div>
