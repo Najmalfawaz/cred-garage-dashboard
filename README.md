@@ -5,6 +5,14 @@ UI Dashboard with a Landing Page
 
 This project is built using modern frontend frameworks and libraries such as React, Next.js, Tailwind CSS, and Framer Motion for Animations.
 
+## 🌐 Live Deployment
+
+Check out the live app here: [Live Demo](https://cred-garage-dashboard-vviq.vercel.app/)
+
+## 🎥 Loom Video
+
+Watch a walkthrough video: [Loom Demo](https://www.loom.com/share/your-loom-video-id)
+
 ## 📦 Installation
 
 To get started, clone the repository and install dependencies:
@@ -19,8 +27,10 @@ npm install
 
 Start the development server:
 
-```bash
-npm start
+```cmd
+
+npm start dev
+
 ```
 
 ## 📄 Description
