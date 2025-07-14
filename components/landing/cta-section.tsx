@@ -23,7 +23,7 @@ export function CTASection({ onEnterDashboard }: CTASectionProps) {
           }}
           transition={{
             duration: 15,
-            repeat: Number.POSITIVE_INFINITY,
+            repeat: Infinity,
             ease: "linear",
           }}
           className="absolute top-1/4 left-1/4 w-64 h-64 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-full blur-3xl"
@@ -35,7 +35,7 @@ export function CTASection({ onEnterDashboard }: CTASectionProps) {
           }}
           transition={{
             duration: 20,
-            repeat: Number.POSITIVE_INFINITY,
+            repeat: Infinity,
             ease: "linear",
           }}
           className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-to-r from-blue-500/15 to-cyan-500/15 rounded-full blur-3xl"
@@ -55,7 +55,7 @@ export function CTASection({ onEnterDashboard }: CTASectionProps) {
             transition={{
               duration: 4,
               delay: i * 0.5,
-              repeat: Number.POSITIVE_INFINITY,
+              repeat: Infinity,
               repeatDelay: 2,
             }}
             className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
@@ -80,21 +80,27 @@ export function CTASection({ onEnterDashboard }: CTASectionProps) {
             boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.1)",
           }}
         >
-          {/* Animated Background */}
+          {/* ✅ Updated Animated Background with Crossfade Layers */}
           <motion.div
-            animate={{
-              background: [
-                "linear-gradient(45deg, rgba(168, 85, 247, 0.1) 0%, rgba(236, 72, 153, 0.1) 50%, rgba(59, 130, 246, 0.1) 100%)",
-                "linear-gradient(45deg, rgba(59, 130, 246, 0.1) 0%, rgba(168, 85, 247, 0.1) 50%, rgba(236, 72, 153, 0.1) 100%)",
-                "linear-gradient(45deg, rgba(236, 72, 153, 0.1) 0%, rgba(59, 130, 246, 0.1) 50%, rgba(168, 85, 247, 0.1) 100%)",
-              ],
-            }}
+            initial={{ opacity: 1 }}
+            animate={{ opacity: [1, 0, 1] }}
             transition={{
               duration: 8,
-              repeat: Number.POSITIVE_INFINITY,
-              ease: "linear",
+              repeat: Infinity,
+              ease: "easeInOut",
             }}
-            className="absolute inset-0 rounded-3xl"
+            className="absolute inset-0 rounded-3xl bg-gradient-to-r from-purple-500/10 via-pink-500/10 to-blue-500/10"
+          />
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: [0, 1, 0] }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 4,
+            }}
+            className="absolute inset-0 rounded-3xl bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10"
           />
 
           {/* Content */}
@@ -109,7 +115,7 @@ export function CTASection({ onEnterDashboard }: CTASectionProps) {
             >
               <motion.div
                 animate={{ rotate: [0, 360] }}
-                transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
+                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
               >
                 <Sparkles className="w-10 h-10 text-white" />
               </motion.div>
@@ -158,18 +164,16 @@ export function CTASection({ onEnterDashboard }: CTASectionProps) {
                 size="lg"
                 className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white border-0 px-12 py-6 rounded-2xl font-semibold text-xl shadow-2xl hover:shadow-purple-500/25 transition-all duration-300 group relative overflow-hidden"
               >
-                {/* Button Background Animation */}
                 <motion.div
                   animate={{ x: ["-100%", "100%"] }}
-                  transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
                   className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
                 />
-
                 <span className="relative z-10 flex items-center">
                   Get Started Now
                   <motion.div
                     animate={{ x: [0, 5, 0] }}
-                    transition={{ duration: 1.5, repeat: Number.POSITIVE_INFINITY }}
+                    transition={{ duration: 1.5, repeat: Infinity }}
                   >
                     <ArrowRight className="w-6 h-6 ml-3 group-hover:translate-x-2 transition-transform" />
                   </motion.div>
