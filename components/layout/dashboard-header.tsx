@@ -31,7 +31,7 @@ export function DashboardHeader() {
             style={{ transformStyle: "preserve-3d" }}
           >
             <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent truncate hover:opacity-90 transition-opacity">
-              CRED Garage
+              DASHBOARD
             </h1>
           </motion.div>
         </Link>

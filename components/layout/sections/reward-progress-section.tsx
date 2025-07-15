@@ -9,14 +9,22 @@ import { Progress3D } from "@/components/ui/progress-3d"
 import { StatsCard } from "@/components/ui/stats-card"
 import { useTheme } from "@/lib/hooks/theme-provider"
 
-
 export function RewardProgressSection() {
   const { theme } = useTheme()
   const [animatedPoints, setAnimatedPoints] = useState(0)
   const [isHovered, setIsHovered] = useState(false)
+  const [screenWidth, setScreenWidth] = useState<number | null>(null)
+
   const totalPoints = 15750
   const nextMilestone = 20000
   const progress = (totalPoints / nextMilestone) * 100
+
+  useEffect(() => {
+    const handleResize = () => setScreenWidth(window.innerWidth)
+    handleResize() // set initial width
+    window.addEventListener("resize", handleResize)
+    return () => window.removeEventListener("resize", handleResize)
+  }, [])
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -41,6 +49,13 @@ export function RewardProgressSection() {
     { name: "Earned", value: totalPoints, color: "#a855f7" },
     { name: "Remaining", value: nextMilestone - totalPoints, color: theme === "dark" ? "#374151" : "#e5e7eb" },
   ]
+
+  const getChartSize = () => {
+    if (screenWidth === null) return 100 // fallback default
+    if (screenWidth < 640) return 80
+    if (screenWidth < 1024) return 112
+    return 128
+  }
 
   return (
     <motion.div
@@ -76,7 +91,6 @@ export function RewardProgressSection() {
               : "none",
           }}
         >
-          {/* Animated background */}
           <motion.div
             animate={{
               background: isHovered
@@ -87,7 +101,7 @@ export function RewardProgressSection() {
             className="absolute inset-0"
           />
 
-          {/* Floating coins animation - reduced for mobile */}
+          {/* Floating coins animation */}
           <AnimatePresence>
             {isHovered && (
               <>
@@ -118,7 +132,9 @@ export function RewardProgressSection() {
 
           <CardHeader className="relative z-10 pb-2 sm:pb-4">
             <CardTitle
-              className={`flex items-center space-x-2 text-lg sm:text-xl ${theme === "dark" ? "text-white" : "text-gray-900"}`}
+              className={`flex items-center space-x-2 text-lg sm:text-xl ${
+                theme === "dark" ? "text-white" : "text-gray-900"
+              }`}
             >
               <motion.div animate={{ rotate: isHovered ? 360 : 0 }} transition={{ duration: 2 }}>
                 <Coins className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-500" />
@@ -169,16 +185,14 @@ export function RewardProgressSection() {
                 >
                   <CircularChart
                     data={chartData}
-                    size={window.innerWidth < 640 ? 80 : window.innerWidth < 1024 ? 112 : 128}
+                    size={getChartSize()}
                     strokeWidth={6}
                     isAnimated={isHovered}
                   />
                 </motion.div>
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-center">
-                    <div
-                      className={`text-sm sm:text-lg font-bold ${theme === "dark" ? "text-white" : "text-gray-900"}`}
-                    >
+                    <div className={`text-sm sm:text-lg font-bold ${theme === "dark" ? "text-white" : "text-gray-900"}`}>
                       {Math.round(progress)}%
                     </div>
                     <div className={`text-xs ${theme === "dark" ? "text-gray-400" : "text-gray-600"}`}>Complete</div>
