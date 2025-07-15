@@ -11,7 +11,7 @@ Check out the live app here: [Live Demo](https://cred-garage-dashboard-vviq.verc
 
 ## 🎥 Loom Video
 
-Watch a walkthrough video: [Loom Demo](https://www.loom.com/share/your-loom-video-id)
+Watch a walkthrough video: [Loom Demo](https://www.loom.com/share/c407c18e14c0441da03a1b258bb5a068?sid=b9e3f9ea-309a-4825-a7cb-c9c91e1969d6)
 
 ## 📦 Installation
 
