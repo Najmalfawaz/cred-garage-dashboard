@@ -7,7 +7,7 @@ import { getTextColor, getCardStyles } from "@/lib/utils/theme-utils"
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
-import { useTheme } from "../../lib/hooks/theme-provider"
+import { useTheme } from "../../../lib/hooks/theme-provider"
 
 interface UserProfileProps {
   name: string

@@ -2,14 +2,14 @@
 
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { UserProfileSection } from "@/components/sections/user-profile-section"
-import { BenefitsSection } from "@/components/sections/benefits-section"
-import { RewardProgressSection } from "@/components/sections/reward-progress-section"
+import { UserProfileSection } from "@/components/layout/sections/user-profile-section"
+import { BenefitsSection } from "@/components/layout/sections/benefits-section"
+import { RewardProgressSection } from "@/components/layout/sections/reward-progress-section"
 import { DashboardHeader } from "@/components/layout/dashboard-header"
 import { THEME_COLORS } from "@/lib/constants/theme"
 import { useTheme } from "../../lib/hooks/theme-provider"
 import { userProfileData } from "@/lib/data/user-data"
-import { StatsSection } from "../sections/stats-section"
+import { StatsSection } from "../layout/sections/stats-section"
 
 export function DashboardContainer() {
   const [isLoading, setIsLoading] = useState(true)
